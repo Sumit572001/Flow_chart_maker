@@ -43,7 +43,7 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
   } = useCanvas();
 
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // Interaction States
   const [dragInfo, setDragInfo] = useState<DragInfo | null>(null);
   const [resizeInfo, setResizeInfo] = useState<ResizeInfo | null>(null);
@@ -79,9 +79,9 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't trigger shortcuts if user is typing in a text field
-      if (document.activeElement?.tagName === 'INPUT' || 
-          document.activeElement?.tagName === 'TEXTAREA' || 
-          document.activeElement?.getAttribute('contenteditable') === 'true') {
+      if (document.activeElement?.tagName === 'INPUT' ||
+        document.activeElement?.tagName === 'TEXTAREA' ||
+        document.activeElement?.getAttribute('contenteditable') === 'true') {
         return;
       }
 
@@ -180,23 +180,23 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
       const my = (y1 + y2) / 2;
 
       // Handle specific layout conditions based on port directions
-      if ((conn.fromPort === 'left' || conn.fromPort === 'right') && 
-          (conn.toPort === 'left' || conn.toPort === 'right')) {
+      if ((conn.fromPort === 'left' || conn.fromPort === 'right') &&
+        (conn.toPort === 'left' || conn.toPort === 'right')) {
         return `M ${x1} ${y1} H ${mx} V ${y2} H ${x2}`;
       }
-      
-      if ((conn.fromPort === 'top' || conn.fromPort === 'bottom') && 
-          (conn.toPort === 'top' || conn.toPort === 'bottom')) {
+
+      if ((conn.fromPort === 'top' || conn.fromPort === 'bottom') &&
+        (conn.toPort === 'top' || conn.toPort === 'bottom')) {
         return `M ${x1} ${y1} V ${my} H ${x2} V ${y2}`;
       }
 
-      if ((conn.fromPort === 'left' || conn.fromPort === 'right') && 
-          (conn.toPort === 'top' || conn.toPort === 'bottom')) {
+      if ((conn.fromPort === 'left' || conn.fromPort === 'right') &&
+        (conn.toPort === 'top' || conn.toPort === 'bottom')) {
         return `M ${x1} ${y1} H ${x2} V ${y2}`;
       }
 
-      if ((conn.fromPort === 'top' || conn.fromPort === 'bottom') && 
-          (conn.toPort === 'left' || conn.toPort === 'right')) {
+      if ((conn.fromPort === 'top' || conn.fromPort === 'bottom') &&
+        (conn.toPort === 'left' || conn.toPort === 'right')) {
         return `M ${x1} ${y1} V ${y2} H ${x2}`;
       }
     }
@@ -231,7 +231,7 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
       // Find if we right clicked a shape
       const shapeUnderMouse = [...shapes].reverse().find(
         s => coords.x >= s.x && coords.x <= s.x + s.width &&
-             coords.y >= s.y && coords.y <= s.y + s.height
+          coords.y >= s.y && coords.y <= s.y + s.height
       );
 
       if (shapeUnderMouse) {
@@ -459,8 +459,8 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
   };
 
   // Drag over empty space to pan indicator style
-  const cursorStyle = toolMode === 'select' 
-    ? (isPanning ? 'grabbing' : 'grab') 
+  const cursorStyle = toolMode === 'select'
+    ? (isPanning ? 'grabbing' : 'grab')
     : 'crosshair';
 
   return (
@@ -509,7 +509,7 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
           >
             <polygon points="10 0, 0 3.5, 10 7" fill="var(--text-secondary)" />
           </marker>
-          
+
           {/* Active selection blue arrowheads */}
           <marker
             id="arrow-end-selected"
@@ -555,11 +555,11 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
                   stroke={isSelected ? 'var(--accent-primary)' : conn.stroke}
                   strokeWidth={isSelected ? conn.strokeWidth + 1 : conn.strokeWidth}
                   strokeDasharray={getStrokeDashArray(conn.strokeDash, conn.strokeWidth)}
-                  markerEnd={conn.arrowHead === 'single' || conn.arrowHead === 'double' 
-                    ? `url(#${isSelected ? 'arrow-end-selected' : 'arrow-end'})` 
+                  markerEnd={conn.arrowHead === 'single' || conn.arrowHead === 'double'
+                    ? `url(#${isSelected ? 'arrow-end-selected' : 'arrow-end'})`
                     : undefined}
-                  markerStart={conn.arrowHead === 'double' 
-                    ? `url(#${isSelected ? 'arrow-end-selected' : 'arrow-start'})` 
+                  markerStart={conn.arrowHead === 'double'
+                    ? `url(#${isSelected ? 'arrow-end-selected' : 'arrow-start'})`
                     : undefined}
                   style={{ transition: 'stroke-width 0.1s' }}
                 />
@@ -748,8 +748,8 @@ const CanvasArea: React.FC<CanvasAreaProps> = ({ svgRef }) => {
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: shape.textAlign === 'center' ? 'center' : 
-                                      shape.textAlign === 'right' ? 'flex-end' : 'flex-start',
+                        justifyContent: shape.textAlign === 'center' ? 'center' :
+                          shape.textAlign === 'right' ? 'flex-end' : 'flex-start',
                         width: '100%',
                         height: '100%',
                         textAlign: shape.textAlign,
